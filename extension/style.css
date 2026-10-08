@@ -1,0 +1,97 @@
+/* Enhanced Floating Sync Widget for Zalo Web */
+#zalo-sync-hub-floating-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 24px;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    padding: 8px 12px;
+    border-radius: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(99, 102, 241, 0.3);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transition: all 0.25s ease;
+}
+
+#zalo-sync-hub-floating-widget:hover {
+    border-color: #6366f1;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+.zalo-sync-group-select {
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 6px 12px;
+    outline: none;
+    cursor: pointer;
+    max-width: 210px;
+}
+
+.zalo-sync-group-select:focus {
+    border-color: #6366f1;
+}
+
+.zalo-sync-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #6366f1, #06b6d4);
+    color: #fff;
+    border: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.zalo-sync-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.6);
+}
+
+.zalo-sync-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Toast Inside Zalo */
+.zalo-sync-toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000000;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #0f172a;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    border-left: 5px solid #10b981;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left-width: 5px;
+    animation: zaloSlideIn 0.3s ease;
+    max-width: 420px;
+}
+
+.zalo-sync-toast-error {
+    border-left-color: #f43f5e;
+}
+
+@keyframes zaloSlideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}

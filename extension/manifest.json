@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Zalo Report Sync Hub",
+  "version": "1.0.0",
+  "description": "Tự động trích xuất và đồng bộ tin nhắn báo cáo từ Zalo Web (chat.zalo.me) về Web App",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://chat.zalo.me/*",
+    "http://127.0.0.1:8000/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Zalo Report Sync Hub"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chat.zalo.me/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

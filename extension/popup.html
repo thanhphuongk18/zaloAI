@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Zalo Report Sync Hub</title>
+    <style>
+        body {
+            width: 320px;
+            margin: 0;
+            padding: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+        }
+        .title {
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            margin-bottom: 14px;
+        }
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .guide {
+            font-size: 12.5px;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .guide strong { color: #f1f5f9; }
+        .btn {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background: #6366f1;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #4f46e5; }
+        .btn-outline {
+            background: rgba(255,255,255,0.06);
+            color: #cbd5e1;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.12); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span style="font-size: 20px;">⚡</span>
+        <div>
+            <div class="title">Zalo Report Sync Hub</div>
+            <div style="font-size: 11px; color: #64748b;">Phiên bản Tự Động Hóa 1.0</div>
+        </div>
+    </div>
+
+    <div class="status-badge" id="server-status">
+        <span class="dot"></span>
+        <span id="status-text">Đang kiểm tra server...</span>
+    </div>
+
+    <div class="guide">
+        👉 Khi mở <strong>chat.zalo.me</strong>, bạn sẽ thấy nút nổi <strong>"⚡ Đồng bộ Báo Cáo"</strong> ở góc dưới bên phải màn hình. Chỉ cần bấm vào là tin nhắn trong nhóm sẽ tự động chuyển về hệ thống!
+    </div>
+
+    <a href="http://127.0.0.1:8000" target="_blank" class="btn">Mở Web Dashboard (Port 8000)</a>
+    <a href="https://chat.zalo.me" target="_blank" class="btn btn-outline">Mở Zalo Web</a>
+
+    <script src="popup.js"></script>
+</body>
+</html>

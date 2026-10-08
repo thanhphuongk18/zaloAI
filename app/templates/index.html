@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zalo Report Hub — Quản lý Báo cáo Zalo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <div class="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    <path d="M8 10h.01M12 10h.01M16 10h.01"></path>
+                </svg>
+            </div>
+            <div>
+                <div class="brand-title">Zalo Report Hub</div>
+                <div class="brand-subtitle">Tổng hợp & Quản lý Báo cáo Nhóm</div>
+            </div>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="dashboard">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                Dashboard
+            </button>
+            <button class="nav-tab" data-tab="reports">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Tất cả Báo cáo
+            </button>
+            <button class="nav-tab" data-tab="members">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Thành viên
+            </button>
+            <button class="nav-tab" data-tab="groups">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                Nhóm Zalo
+            </button>
+        </nav>
+
+        <div class="nav-actions" style="display: flex; gap: 10px;">
+            <button class="btn btn-outline" id="btn-open-notion-modal" style="border-color: #6366f1; color: #a5b4fc;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                📔 Kết nối Notion
+            </button>
+            <button class="btn btn-primary" id="btn-quick-add-report">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                + Thêm Báo cáo
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- ================= TAB 1: DASHBOARD ================= -->
+        <section id="tab-dashboard" class="tab-content active">
+            <!-- Date Filter & Quick Navigation -->
+            <div class="date-navigator-card">
+                <div class="date-controls">
+                    <button class="btn btn-icon" id="btn-prev-day" title="Ngày trước">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <div class="date-picker-wrap">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="calendar-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        <input type="date" id="dashboard-date-picker" class="input-date">
+                    </div>
+                    <button class="btn btn-icon" id="btn-next-day" title="Ngày sau">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                    <button class="btn btn-outline" id="btn-today">Hôm nay</button>
+                    <button class="btn btn-outline" id="btn-yesterday">Hôm qua</button>
+                </div>
+                <div class="date-status-badge">
+                    <span id="current-date-label">Đang tải...</span>
+                </div>
+            </div>
+
+            <!-- KPI Metric Cards -->
+            <div class="metrics-grid">
+                <div class="metric-card metric-members">
+                    <div class="metric-header">
+                        <span class="metric-title">Tổng Thành Viên</span>
+                        <div class="metric-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                        </div>
+                    </div>
+                    <div class="metric-value" id="stat-total-members">0</div>
+                    <div class="metric-hint">Nhân sự active trong hệ thống</div>
+                </div>
+
+                <div class="metric-card metric-reported">
+                    <div class="metric-header">
+                        <span class="metric-title">Đã Báo Cáo</span>
+                        <div class="metric-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                    </div>
+                    <div class="metric-value text-success" id="stat-reported-members">0</div>
+                    <div class="metric-progress">
+                        <div class="metric-progress-bar bg-success" id="stat-progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="metric-hint" id="stat-reported-percent">Tỷ lệ hoàn thành: 0%</div>
+                </div>
+
+                <div class="metric-card metric-missing">
+                    <div class="metric-header">
+                        <span class="metric-title">Chưa Báo Cáo</span>
+                        <div class="metric-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        </div>
+                    </div>
+                    <div class="metric-value text-danger" id="stat-unreported-members">0</div>
+                    <div class="metric-hint">Cần nhắc nhở nộp báo cáo</div>
+                </div>
+
+                <div class="metric-card metric-reports">
+                    <div class="metric-header">
+                        <span class="metric-title">Tổng Tin Báo Cáo</span>
+                        <div class="metric-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="metric-value text-info" id="stat-total-reports">0</div>
+                    <div class="metric-hint">Gửi qua 2 nhóm Zalo</div>
+                </div>
+            </div>
+
+            <!-- Group Reports Container (Group 1: Báo cáo Leader, Group 2: Game Dev) -->
+            <div id="groups-container" class="groups-grid">
+                <!-- Dynamically rendered -->
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Đang tải dữ liệu báo cáo...</p>
+                </div>
+            </div>
+
+            <!-- Unreported Members Warning Section -->
+            <div class="unreported-section-card">
+                <div class="unreported-header">
+                    <div class="unreported-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        <span>DANH SÁCH THÀNH VIÊN CHƯA BÁO CÁO</span>
+                        <span class="badge badge-danger" id="badge-unreported-count">0</span>
+                    </div>
+                </div>
+                <div id="unreported-members-list" class="unreported-chips">
+                    <!-- Chips inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: ALL REPORTS ================= -->
+        <section id="tab-reports" class="tab-content">
+            <div class="page-card">
+                <div class="filter-bar">
+                    <div class="filter-item">
+                        <label>Ngày báo cáo</label>
+                        <input type="date" id="filter-report-date" class="input-control">
+                    </div>
+                    <div class="filter-item">
+                        <label>Nhóm</label>
+                        <select id="filter-report-group" class="input-control">
+                            <option value="">-- Tất cả nhóm --</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <label>Thành viên</label>
+                        <select id="filter-report-member" class="input-control">
+                            <option value="">-- Tất cả thành viên --</option>
+                        </select>
+                    </div>
+                    <div class="filter-item btn-group-filter">
+                        <button class="btn btn-primary" id="btn-apply-report-filter">Lọc</button>
+                        <button class="btn btn-outline" id="btn-reset-report-filter">Reset</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="table-reports">
+                        <thead>
+                            <tr>
+                                <th style="width: 70px;">ID</th>
+                                <th style="width: 140px;">Ngày</th>
+                                <th style="width: 160px;">Nhóm</th>
+                                <th style="width: 180px;">Thành viên</th>
+                                <th>Nội dung báo cáo</th>
+                                <th style="width: 110px;">Giờ gửi</th>
+                                <th style="width: 110px; text-align: right;">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-reports">
+                            <tr><td colspan="7" class="text-center">Đang tải...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: MEMBERS ================= -->
+        <section id="tab-members" class="tab-content">
+            <div class="page-card">
+                <div class="page-header">
+                    <div>
+                        <h2>Danh Sách Thành Viên</h2>
+                        <p class="text-muted">Quản lý nhân sự trong hệ thống báo cáo</p>
+                    </div>
+                    <button class="btn btn-primary" id="btn-add-member">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        Thêm Thành Viên
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="table-members">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">ID</th>
+                                <th>Họ và Tên</th>
+                                <th style="width: 140px;">Trạng thái</th>
+                                <th style="width: 180px;">Ngày tạo</th>
+                                <th style="width: 120px; text-align: right;">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-members">
+                            <tr><td colspan="5" class="text-center">Đang tải...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: GROUPS ================= -->
+        <section id="tab-groups" class="tab-content">
+            <div class="page-card">
+                <div class="page-header">
+                    <div>
+                        <h2>Danh Sách Nhóm Zalo</h2>
+                        <p class="text-muted">Quản lý các nhóm tiếp nhận báo cáo</p>
+                    </div>
+                    <button class="btn btn-primary" id="btn-add-group">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        Thêm Nhóm Mới
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="table-groups">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">ID</th>
+                                <th style="width: 220px;">Tên Nhóm</th>
+                                <th>Mô tả</th>
+                                <th style="width: 140px;">Trạng thái</th>
+                                <th style="width: 180px;">Ngày tạo</th>
+                                <th style="width: 120px; text-align: right;">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-groups">
+                            <tr><td colspan="6" class="text-center">Đang tải...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- Modal: Thêm / Sửa Report -->
+    <div class="modal-overlay" id="modal-report">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="modal-report-title">Thêm Báo Cáo Mới</h3>
+                <button class="btn-close" onclick="closeModal('modal-report')">&times;</button>
+            </div>
+            <form id="form-report" onsubmit="handleSaveReport(event)">
+                <input type="hidden" id="report-id">
+                <div class="form-group">
+                    <label>Nhóm nhận báo cáo <span class="required">*</span></label>
+                    <select id="report-group-id" class="input-control" required>
+                        <!-- populated via js -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Thành viên báo cáo <span class="required">*</span></label>
+                    <select id="report-member-id" class="input-control" required>
+                        <!-- populated via js -->
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-half">
+                        <label>Ngày báo cáo <span class="required">*</span></label>
+                        <input type="date" id="report-date" class="input-control" required>
+                    </div>
+                    <div class="form-group col-half">
+                        <label>Thời điểm gửi</label>
+                        <input type="time" id="report-time" class="input-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung báo cáo <span class="required">*</span></label>
+                    <textarea id="report-content" class="input-control textarea-control" rows="4" placeholder="Nhập chi tiết các task đã hoàn thành hoặc đang thực hiện..." required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('modal-report')">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save-report">Lưu Báo Cáo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Thêm / Sửa Member -->
+    <div class="modal-overlay" id="modal-member">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="modal-member-title">Thêm Thành Viên</h3>
+                <button class="btn-close" onclick="closeModal('modal-member')">&times;</button>
+            </div>
+            <form id="form-member" onsubmit="handleSaveMember(event)">
+                <input type="hidden" id="member-id">
+                <div class="form-group">
+                    <label>Họ và tên thành viên <span class="required">*</span></label>
+                    <input type="text" id="member-name" class="input-control" placeholder="Ví dụ: Nguyễn Văn A" required>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="member-active" checked>
+                        <span>Đang hoạt động (Active)</span>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('modal-member')">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save-member">Lưu Thành Viên</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Thêm / Sửa Group -->
+    <div class="modal-overlay" id="modal-group">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="modal-group-title">Thêm Nhóm Zalo</h3>
+                <button class="btn-close" onclick="closeModal('modal-group')">&times;</button>
+            </div>
+            <form id="form-group" onsubmit="handleSaveGroup(event)">
+                <input type="hidden" id="group-id">
+                <div class="form-group">
+                    <label>Tên nhóm <span class="required">*</span></label>
+                    <input type="text" id="group-name" class="input-control" placeholder="Ví dụ: Báo cáo Leader" required>
+                </div>
+                <div class="form-group">
+                    <label>Mô tả nhóm</label>
+                    <textarea id="group-description" class="input-control textarea-control" rows="3" placeholder="Mô tả mục đích nhóm..."></textarea>
+                </div>
+                <div class="form-group checkbox-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="group-active" checked>
+                        <span>Đang hoạt động (Active)</span>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('modal-group')">Hủy</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save-group">Lưu Nhóm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    
+    <!-- Modal: Cấu hình Notion -->
+    <div class="modal-overlay" id="modal-notion">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3>📔 Cấu hình & Đồng bộ Notion</h3>
+                <button class="btn-close" onclick="closeModal('modal-notion')">&times;</button>
+            </div>
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 16px; line-height: 1.5;">
+                Hệ thống sẽ tự động tạo bảng <strong>"Báo Cáo Dự Án Game"</strong> trên trang Notion của bạn và đẩy các báo cáo kèm số nhóm, tiến độ và link đính kèm!
+            </div>
+            <form id="form-notion" onsubmit="handleSaveNotion(event)">
+                <div class="form-group">
+                    <label>Notion Integration Token <span class="required">*</span></label>
+                    <input type="password" id="notion-token" class="input-control" placeholder="secret_... hoặc ntn_..." required>
+                    <small style="color: #64748b; font-size: 0.75rem;">Lấy tại: notion.so/my-integrations</small>
+                </div>
+                <div class="form-group">
+                    <label>Link trang Notion hoặc Page ID <span class="required">*</span></label>
+                    <input type="text" id="notion-page-id" class="input-control" placeholder="Dán URL trang Notion hoặc Page ID vào đây..." required>
+                    <small style="color: #64748b; font-size: 0.75rem;">Ví dụ: https://www.notion.so/Bao-cao-du-an-game-1234567890abcdef...</small>
+                </div>
+                <div class="modal-footer" style="justify-content: space-between;">
+                    <button type="button" class="btn btn-outline" id="btn-sync-now-notion" onclick="handleSyncToNotion()" style="color: #10b981; border-color: #10b981;">
+                        ⚡ Đẩy báo cáo lên Notion ngay
+                    </button>
+                    <div style="display: flex; gap: 8px;">
+                        <button type="button" class="btn btn-outline" onclick="closeModal('modal-notion')">Đóng</button>
+                        <button type="submit" class="btn btn-primary" id="btn-save-notion">Lưu Cấu Hình</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="/static/js/groups.js"></script>
+    <script src="/static/js/members.js"></script>
+    <script src="/static/js/reports.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
